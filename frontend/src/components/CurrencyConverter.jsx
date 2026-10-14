@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const currencies = ["USD", "EUR", "GBP", "JPY"];
+
 export function CurrencyConverter() {
     const [amount, setAmount] = useState(0);
     const [fromCurrency, setFromCurrency] = useState("USD");
@@ -63,10 +65,9 @@ export function CurrencyConverter() {
                                 value={fromCurrency}
                                 onChange={(event) => setFromCurrency(event.target.value)}
                             >
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                                <option value="GBP">GBP</option>
-                                <option value="JPY">JPY</option>
+                            {currencies.map((currency) => (
+                                <option key={currency} value={currency}>{currency}</option>
+                            ))}
                             </select>
                         </div>
                     </div>
@@ -80,10 +81,9 @@ export function CurrencyConverter() {
                                 value={toCurrency}
                                 onChange={(event) => setToCurrency(event.target.value)}
                             >
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                                <option value="GBP">GBP</option>
-                                <option value="JPY">JPY</option>
+                            {currencies.map((currency) => (
+                                <option key={currency} value={currency}>{currency}</option>
+                            ))}
                             </select>
                         </div>
                     </div>
