@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export function CurrencyConverter() {
     const [amount, setAmount] = useState(0);
+    const [fromCurrency, setFromCurrency] = useState("USD");
 
     return (
         <div className="__converter">
@@ -16,7 +17,20 @@ export function CurrencyConverter() {
                     value={amount}
                     onChange={(event) => setAmount(event.target.value)}
                 />
-                <p>Entered amount: {amount}</p>
+                <div>
+                    <label htmlFor="fromCurrency">From</label>
+
+                    <select
+                        id="fromCurrency"
+                        value={fromCurrency}
+                        onChange={(event) => setFromCurrency(event.target.value)}
+                    >
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="GBP">GBP</option>
+                        <option value="JPY">JPY</option>
+                    </select>
+                </div>
             </form>
         </div>
     );
