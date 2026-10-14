@@ -1,0 +1,28 @@
+:root {
+  // Colors
+  --color-background: #111315;
+  --color-surface: #1b1e20;
+  --color-surface-hover: #25292b;
+
+  --color-text: #f2f3f3;
+  --color-text-muted: #92999c;
+
+  --color-border: #34393b;
+
+  --color-accent: #b5e48c;
+  --color-accent-hover: #99d66c;
+
+  // Typography
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+
+  // Layout
+  --container-width: 480px;
+
+  // Border radius
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  // Transitions
+  --transition-default: 0.2s ease;
+}

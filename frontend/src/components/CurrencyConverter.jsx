@@ -4,7 +4,7 @@ export function CurrencyConverter() {
     const [amount, setAmount] = useState(0);
 
     return (
-        <div>
+        <div className="__converter">
             <h1>FXFlow Currency Converter</h1>
 
             <form>
