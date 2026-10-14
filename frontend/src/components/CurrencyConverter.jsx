@@ -2,6 +2,13 @@ import { useState } from "react";
 
 const currencies = ["USD", "EUR", "GBP", "JPY"];
 
+const exchangeRates = {
+    USD: 1,
+    EUR: 0.92,
+    GBP: 0.78,
+    JPY: 156.7
+};
+
 export function CurrencyConverter() {
     const [amount, setAmount] = useState(0);
     const [fromCurrency, setFromCurrency] = useState("USD");
