@@ -13,7 +13,10 @@ export function CurrencyConverter() {
                     type="number"
                     id="amount"
                     placeholder="Enter amount"
+                    value={amount}
+                    onChange={(event) => setAmount(event.target.value)}
                 />
+                <p>Entered amount: {amount}</p>
             </form>
         </div>
     );
