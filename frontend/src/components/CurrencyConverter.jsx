@@ -7,46 +7,87 @@ export function CurrencyConverter() {
 
     return (
         <div className="__converter">
-            <h1>FXFlow Currency Converter</h1>
+            <h1 className="__converter-title">
+                FXFlow Currency Converter
+            </h1>
 
-            <form>
-                <label htmlFor="amount">Amount</label>
-                <input
-                    type="number"
-                    id="amount"
-                    placeholder="Enter amount"
-                    value={amount}
-                    onChange={(event) => setAmount(event.target.value)}
-                />
-                <div>
-                    <label htmlFor="fromCurrency">From</label>
+            <form
+                className="__converter-form"
+                onSubmit={(event) => event.preventDefault()}
+            >
+                <div className="__converter-field">
+                    <label htmlFor="amount">Amount</label>
 
-                    <select
-                        id="fromCurrency"
-                        value={fromCurrency}
-                        onChange={(event) => setFromCurrency(event.target.value)}
-                    >
-                        <option value="USD">USD</option>
-                        <option value="EUR">EUR</option>
-                        <option value="GBP">GBP</option>
-                        <option value="JPY">JPY</option>
-                    </select>
+                    <div className="__converter-amount">
+                        <input
+                            type="number"
+                            id="amount"
+                            min="0"
+                            step="0.01"
+                            placeholder="Enter amount"
+                            value={amount}
+                            onChange={(event) => setAmount(event.target.value)}
+                        />
+
+                        <div className="__converter-amount-controls">
+                            <button
+                                type="button"
+                                aria-label="Decrease amount"
+                                onClick={() =>
+                                    setAmount(Math.max(0, Math.round((Number(amount) - 1) * 100) / 100))
+                                }
+                            >
+                                −
+                            </button>
+
+                            <button
+                                type="button"
+                                aria-label="Increase amount"
+                                onClick={() =>
+                                    setAmount(Math.round((Number(amount) + 1) * 100) / 100)
+                                }
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor="toCurrency">To</label>
 
-                    <select
-                        id="toCurrency"
-                        value={toCurrency}
-                        onChange={(event) => setToCurrency(event.target.value)}
-                    >
-                        <option value="USD">USD</option>
-                        <option value="EUR">EUR</option>
-                        <option value="GBP">GBP</option>
-                        <option value="JPY">JPY</option>
-                    </select>
+                <div className="__converter-currencies">
+                    <div className="__converter-field">
+                        <label htmlFor="fromCurrency">From</label>
+
+                        <div className="__converter-select">
+                            <select
+                                id="fromCurrency"
+                                value={fromCurrency}
+                                onChange={(event) => setFromCurrency(event.target.value)}
+                            >
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                                <option value="JPY">JPY</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="__converter-field">
+                        <label htmlFor="toCurrency">To</label>
+
+                        <div className="__converter-select">
+                            <select
+                                id="toCurrency"
+                                value={toCurrency}
+                                onChange={(event) => setToCurrency(event.target.value)}
+                            >
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                                <option value="JPY">JPY</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <p>To Currency: {toCurrency}</p>
             </form>
         </div>
     );
