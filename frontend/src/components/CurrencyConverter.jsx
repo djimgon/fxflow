@@ -34,7 +34,11 @@ export function CurrencyConverter() {
     };
 
     const convertedAmounts = useMemo(() => {
-        const amountInUSD = Number(amount) / exchangeRates[fromCurrency];
+        const numericAmount = Number(amount);
+
+        const amountInUSD =
+            (Number.isFinite(numericAmount) ? numericAmount : 0)
+            / exchangeRates[fromCurrency];
 
         return currencies.map((currency) => {
             return {
