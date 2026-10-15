@@ -12,13 +12,11 @@ export function CurrencyConverter() {
     const handleAmountChange = (event) => {
         const value = event.target.value;
 
-        if (!/^\d*\.?\d*$/.test(value)) {
+        if (!/^[0-9]*\.?[0-9]*$/.test(value)) {
             return;
         }
 
-        const normalizedValue = value.replace(/^0+(?=\d)/, "");
-
-        setAmount(normalizedValue);
+        setAmount(value.replace(/^0+(?=\d)/, ""));
     };
 
     const handleIncrease = () => {
@@ -89,7 +87,9 @@ export function CurrencyConverter() {
                     <span>Converted Amount:&nbsp;</span>
 
                     <strong>
-                        {convertedAmount.amount.toFixed(2)} {toCurrency}
+                        {amount !== "" && amount !== "."
+                            ? `${convertedAmount.amount.toFixed(2)} ${toCurrency}`
+                            : "—"}
                     </strong>
                 </div>
             </form>
