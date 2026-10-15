@@ -14,6 +14,10 @@ export function CurrencyConverter() {
     const [fromCurrency, setFromCurrency] = useState("USD");
     const [toCurrency, setToCurrency] = useState("EUR");
 
+    const convertedAmount =
+        (Number(amount) / exchangeRates[fromCurrency]) *
+        exchangeRates[toCurrency];
+
     return (
         <div className="__converter">
             <h1 className="__converter-title">
@@ -95,6 +99,9 @@ export function CurrencyConverter() {
                         </div>
                     </div>
                 </div>
+                <p>
+                    {convertedAmount.toFixed(2)} {toCurrency}
+                </p>
             </form>
         </div>
     );
