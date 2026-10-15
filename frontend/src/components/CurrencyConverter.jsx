@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import {useState, useMemo} from "react";
 
 const currencies = ["USD", "EUR", "GBP", "JPY"];
 
@@ -10,7 +10,7 @@ const exchangeRates = {
 };
 
 export function CurrencyConverter() {
-    const [amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState("");
     const [fromCurrency, setFromCurrency] = useState("USD");
     const [toCurrency, setToCurrency] = useState("EUR");
 
@@ -87,9 +87,9 @@ export function CurrencyConverter() {
                                 value={fromCurrency}
                                 onChange={(event) => setFromCurrency(event.target.value)}
                             >
-                            {currencies.map((currency) => (
-                                <option key={currency} value={currency}>{currency}</option>
-                            ))}
+                                {currencies.map((currency) => (
+                                    <option key={currency} value={currency}>{currency}</option>
+                                ))}
                             </select>
                         </div>
                     </div>
@@ -103,9 +103,9 @@ export function CurrencyConverter() {
                                 value={toCurrency}
                                 onChange={(event) => setToCurrency(event.target.value)}
                             >
-                            {currencies.map((currency) => (
-                                <option key={currency} value={currency}>{currency}</option>
-                            ))}
+                                {currencies.map((currency) => (
+                                    <option key={currency} value={currency}>{currency}</option>
+                                ))}
                             </select>
                         </div>
                     </div>
