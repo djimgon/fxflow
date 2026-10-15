@@ -61,8 +61,8 @@ export function CurrencyConverter() {
 
                     <div className="__converter-amount">
                         <input
-                            type="number"
-                            id="amount"
+                            type="text"
+                            inputMode="decimal"
                             min="0"
                             step="0.01"
                             placeholder="Enter amount"
