@@ -14,6 +14,23 @@ export function CurrencyConverter() {
     const [fromCurrency, setFromCurrency] = useState("USD");
     const [toCurrency, setToCurrency] = useState("EUR");
 
+    const handleAmountChange = (event) => {
+        const value = event.target.value;
+
+        if (value === "") {
+            setAmount("");
+            return;
+        }
+
+        const normalizedValue = value.replace(/^0+(?=\d)/, "");
+
+        if (!Number.isFinite(Number(normalizedValue)) || Number(normalizedValue) < 0) {
+            return;
+        }
+
+        setAmount(normalizedValue);
+    };
+
     const convertedAmounts = useMemo(() => {
         const amountInUSD = Number(amount) / exchangeRates[fromCurrency];
 
@@ -50,7 +67,7 @@ export function CurrencyConverter() {
                             step="0.01"
                             placeholder="Enter amount"
                             value={amount}
-                            onChange={(event) => setAmount(event.target.value)}
+                            onChange={handleAmountChange}
                         />
 
                         <div className="__converter-amount-controls">
