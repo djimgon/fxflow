@@ -1,13 +1,8 @@
 import {useState, useMemo} from "react";
 
-const currencies = ["USD", "EUR", "GBP", "JPY"];
-
-const exchangeRates = {
-    USD: 1,
-    EUR: 0.92,
-    GBP: 0.78,
-    JPY: 156.7
-};
+import { currencies, exchangeRates } from "../data/currencies";
+import { CurrencySelect } from "./CurrencySelect";
+import { AmountInput } from "./AmountInput";
 
 export function CurrencyConverter() {
     const [amount, setAmount] = useState("");
@@ -17,18 +12,25 @@ export function CurrencyConverter() {
     const handleAmountChange = (event) => {
         const value = event.target.value;
 
-        if (value === "") {
-            setAmount("");
+        if (!/^\d*\.?\d*$/.test(value)) {
             return;
         }
 
         const normalizedValue = value.replace(/^0+(?=\d)/, "");
 
-        if (!Number.isFinite(Number(normalizedValue)) || Number(normalizedValue) < 0) {
-            return;
-        }
-
         setAmount(normalizedValue);
+    };
+
+    const handleIncrease = () => {
+        setAmount((prev) =>
+            Math.round((Number(prev) + 1) * 100) / 100
+        );
+    };
+
+    const handleDecrease = () => {
+        setAmount((prev) =>
+            Math.max(0, Math.round((Number(prev) - 1) * 100) / 100)
+        );
     };
 
     const convertedAmounts = useMemo(() => {
@@ -56,76 +58,27 @@ export function CurrencyConverter() {
                 className="__converter-form"
                 onSubmit={(event) => event.preventDefault()}
             >
-                <div className="__converter-field">
-                    <label htmlFor="amount">Amount</label>
-
-                    <div className="__converter-amount">
-                        <input
-                            type="text"
-                            inputMode="decimal"
-                            min="0"
-                            step="0.01"
-                            placeholder="Enter amount"
-                            value={amount}
-                            onChange={handleAmountChange}
-                        />
-
-                        <div className="__converter-amount-controls">
-                            <button
-                                type="button"
-                                aria-label="Decrease amount"
-                                onClick={() =>
-                                    setAmount(Math.max(0, Math.round((Number(amount) - 1) * 100) / 100))
-                                }
-                            >
-                                −
-                            </button>
-
-                            <button
-                                type="button"
-                                aria-label="Increase amount"
-                                onClick={() =>
-                                    setAmount(Math.round((Number(amount) + 1) * 100) / 100)
-                                }
-                            >
-                                +
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <AmountInput
+                    value={amount}
+                    onChange={handleAmountChange}
+                    onIncrease={handleIncrease}
+                    onDecrease={handleDecrease}
+                />
 
                 <div className="__converter-currencies">
-                    <div className="__converter-field">
-                        <label htmlFor="fromCurrency">From</label>
+                    <CurrencySelect
+                        id="fromCurrency"
+                        label="From"
+                        value={fromCurrency}
+                        onChange={(event) => setFromCurrency(event.target.value)}
+                    />
 
-                        <div className="__converter-select">
-                            <select
-                                id="fromCurrency"
-                                value={fromCurrency}
-                                onChange={(event) => setFromCurrency(event.target.value)}
-                            >
-                                {currencies.map((currency) => (
-                                    <option key={currency} value={currency}>{currency}</option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
-
-                    <div className="__converter-field">
-                        <label htmlFor="toCurrency">To</label>
-
-                        <div className="__converter-select">
-                            <select
-                                id="toCurrency"
-                                value={toCurrency}
-                                onChange={(event) => setToCurrency(event.target.value)}
-                            >
-                                {currencies.map((currency) => (
-                                    <option key={currency} value={currency}>{currency}</option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
+                    <CurrencySelect
+                        id="toCurrency"
+                        label="To"
+                        value={toCurrency}
+                        onChange={(event) => setToCurrency(event.target.value)}
+                    />
                 </div>
 
                 <div className="__converter-result">
