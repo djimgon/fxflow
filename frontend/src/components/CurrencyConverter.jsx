@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 const currencies = ["USD", "EUR", "GBP", "JPY"];
 
@@ -14,9 +14,20 @@ export function CurrencyConverter() {
     const [fromCurrency, setFromCurrency] = useState("USD");
     const [toCurrency, setToCurrency] = useState("EUR");
 
-    const convertedAmount =
-        (Number(amount) / exchangeRates[fromCurrency]) *
-        exchangeRates[toCurrency];
+    const convertedAmounts = useMemo(() => {
+        const amountInUSD = Number(amount) / exchangeRates[fromCurrency];
+
+        return currencies.map((currency) => {
+            return {
+                currency: currency,
+                amount: amountInUSD * exchangeRates[currency]
+            };
+        });
+    }, [amount, fromCurrency]);
+
+    const convertedAmount = convertedAmounts.find(
+        (item) => item.currency === toCurrency
+    );
 
     return (
         <div className="__converter">
@@ -99,9 +110,14 @@ export function CurrencyConverter() {
                         </div>
                     </div>
                 </div>
-                <p>
-                    {convertedAmount.toFixed(2)} {toCurrency}
-                </p>
+
+                <div className="__converter-result">
+                    <span>Converted Amount:&nbsp;</span>
+
+                    <strong>
+                        {convertedAmount.amount.toFixed(2)} {toCurrency}
+                    </strong>
+                </div>
             </form>
         </div>
     );
