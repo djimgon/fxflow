@@ -2,7 +2,9 @@
 
 **FXFlow** is a modern currency converter application built with React.
 
-The project provides a simple, intuitive, and responsive interface for currency conversion, focusing on usability, performance, and modern frontend development practices.
+The project provides a simple, intuitive, and responsive interface for currency conversion, focusing on usability, clean component architecture, and modern frontend development practices.
+
+Developed as a practical React project to strengthen frontend development skills.
 
 ## 🛠 Tech Stack
 
@@ -20,7 +22,6 @@ The project provides a simple, intuitive, and responsive interface for currency 
 
 Make sure you have installed:
 
-- Node.js & npm
 - Docker & Docker Compose
 - Make
 
@@ -33,36 +34,65 @@ git clone https://github.com/djimgon/fxflow.git
 cd fxflow
 ```
 
-**2. Initialize React (first-time setup only)**
-
-```bash
-cd frontend
-npm create vite@latest . -- --template react
-cd ..
-```
-
-> Node.js and npm must be installed on the host machine to initialize React.
-
-**3. Initialize Docker environment**
+**2. Initialize and start the application**
 
 ```bash
 make init
 ```
 
-**4. Restart the environment after initial setup**
-
-```bash
-make down
-make init
-```
-
-**5. Open the application**
+**3. Open the application**
 
 http://localhost:8080
 
+### Stopping the Application
+
+```bash
+make down
+```
+
+## 🎯 Features
+
+- Currency conversion interface
+- Support for multiple currencies
+- Automatic conversion based on selected currencies
+- Dynamic updates when changing amounts
+- Currency selection for source and target currencies
+- Input validation
+- Responsive user interface
+- Reusable React components
+
+## 🧠 React Concepts Practiced
+
+- Functional Components
+- Props & Component Composition
+- React Hooks (`useState`, `useMemo`)
+- Event Handling
+- Controlled Inputs
+- Conditional Rendering
+- Dynamic Calculations
+- State Management
+- Component Reusability
+- JavaScript Array Methods
+
+## 📁 Project Structure
+
+```text
+frontend/
+└── src/
+    ├── components/
+    │   ├── CurrencyConverter.jsx
+    │   ├── CurrencySelect.jsx
+    │   └── AmountInput.jsx
+    ├── data/
+    │   └── currencies.js
+    ├── App.jsx
+    ├── App.css
+    └── main.jsx
+```
+
 ## 📌 Project Status
 
-🚧 Under active development.
+✅ Completed — Core currency conversion functionality implemented.
 
 ---
 
